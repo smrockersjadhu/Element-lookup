@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Element Name by Atomic Number</title>
+</head>
+<body>
+    <h1>Find Element Name by Atomic Number</h1>
+    <label for="atomicNumber">Enter Atomic Number:</label>
+    <input type="number" id="atomicNumber">
+    <button onclick="findElementName()">Find Name</button>
+    <p id="elementName"></p>
+
+    <script>
+        function findElementName() {
+            const atomicNumberInput = document.getElementById("atomicNumber");
+            const elementNameOutput = document.getElementById("elementName");
+
+            const atomicNumber = parseInt(atomicNumberInput.value);
+            const elementName = getElementName(atomicNumber);
+
+            if (elementName) {
+                elementNameOutput.textContent = `Element name: ${elementName}`;
+            } else {
+                elementNameOutput.textContent = "Element not found.";
+            }
+        }
+
+        function getElementName(atomicNumber) {
+            const elements = {
+                1: "Hydrogen",
+                2: "Helium",
+                3: "Lithium",
+                4: "Beryllium",
+                5: "Boron",
+                6: "Carbon",
+                7: "Nitrogen",
+                8: "Oxygen",
+                9: "Fluorine",
+                10: "Neon",
+                // Add more elements here...
+            };
+
+            return elements[atomicNumber];
+        }
+    </script>
+</body>
+</html>

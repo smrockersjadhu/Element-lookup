@@ -10,38 +10,38 @@
     <button onclick="findElementName()">Find Name</button>
     <p id="elementName"></p>
 
-    <script>
-        function findElementName() {
-            const atomicNumberInput = document.getElementById("atomicNumber");
-            const elementNameOutput = document.getElementById("elementName");
+    <!-- Your HTML and input elements -->
 
-            const atomicNumber = parseInt(atomicNumberInput.value);
-            const elementName = getElementName(atomicNumber);
+<script>
+    // Load the JSON data
+    fetch("elements.json")
+        .then(response => response.json())
+        .then(elements => {
+            // Store the elements data for quick access
+            const elementsData = elements;
 
-            if (elementName) {
-                elementNameOutput.textContent = `Element name: ${elementName}`;
-            } else {
-                elementNameOutput.textContent = "Element not found.";
+            function findElementName() {
+                const atomicNumberInput = document.getElementById("atomicNumber");
+                const elementNameOutput = document.getElementById("elementName");
+
+                const atomicNumber = parseInt(atomicNumberInput.value);
+                const elementName = getElementName(atomicNumber);
+
+                if (elementName) {
+                    elementNameOutput.textContent = `Element name: ${elementName}`;
+                } else {
+                    elementNameOutput.textContent = "Element not found.";
+                }
             }
-        }
 
-        function getElementName(atomicNumber) {
-            const elements = {
-                1: "Hydrogen",
-                2: "Helium",
-                3: "Lithium",
-                4: "Beryllium",
-                5: "Boron",
-                6: "Carbon",
-                7: "Nitrogen",
-                8: "Oxygen",
-                9: "Fluorine",
-                10: "Neon",
-                // Add more elements here...
-            };
+            function getElementName(atomicNumber) {
+                return elementsData[atomicNumber] || null;
+            }
+        })
+        .catch(error => console.error("Error loading elements data:", error));
+</script>
 
-            return elements[atomicNumber];
-        }
-    </script>
+<!-- Rest of your HTML -->
+
 </body>
 </html>
